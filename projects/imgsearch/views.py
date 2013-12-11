@@ -19,7 +19,6 @@ from PIL import Image, ImageDraw
 
 from edit_dist import EditDistance
 from imgsearch.video import *
-from imgsearch.models import Histograms, Images, Keywords
 
 
 #class to hold the result to display

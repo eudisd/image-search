@@ -3,28 +3,23 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django import forms
 from django.db import models
-from imgsearch.models import Histograms, Images, Keywords
+from django.conf import settings
+
 import StringIO
-from PIL import Image, ImageDraw
 from itertools import chain
 from operator import itemgetter
-from edit_dist import EditDistance
+from PIL import Image, ImageDraw
+
 import json
 import sys, os, zipfile, shutil
 import logging as log
 
+from edit_dist import EditDistance
 from imgsearch.models import *
 
-#This needs to point to your repository static/image folder!
-IMAGE_DIR = '/home/prototype/repos/git/img-search/projects/imgsearch/static/images'
-#IMAGE_DIR = '/home/carl/git/img-search/projects/imgsearch/static/images'
-#IMAGE_DIR = '/home5/bluemedi/.local/lib/python2.7/site-packages/projects/imgsearch/static/images'
 
-#This needs to point to your repository static/videos folder!
-VIDEO_DIR = '/home/prototype/repos/git/img-search/projects/imgsearch/static/videos'
-#VIDEO_DIR = '/home/carl/git/img-search/projects/imgsearch/static/videos'
-#VIDEO_DIR = '/home/prototype/repos/git/img-search/projects/imgsearch/static/videos'
-
+IMAGE_DIR = settings.IMAGE_DIR
+VIDEO_DIR = settings.VIDEO_DIR
 
 # Here be dragons...
 
