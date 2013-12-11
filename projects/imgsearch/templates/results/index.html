@@ -39,7 +39,6 @@
         this.flag.animate({opacity: 0}, 300, function () {this.remove();});
     }
 
-    //graph.g.text(70,10, "(Hover Over Bar Values)");
     graph.g.barchart(5, 5, 168, 158, data1, 0, {type: "sharp"}).hover(fin, fout);
     graph2.g.barchart(5, 5, 168, 158, data2, 0, {type: "sharp"}).hover(fin2, fout2);
 });
@@ -78,12 +77,6 @@
             </div> 
            
            </div>
-           <!--
-           <div style='width: 59%; float: left'>
-            <span style='color: rgb(100,100,180); font-size: 18px;'>Query:</span> {{ query }} <br /><br />
-            Threshold: <input id='thresh' size='10' type='text' />
-           </div>-->
-           
         </div>
         
 	<div class='r' style='width:22%; float: left; border: 1px solid black; padding: 1% 1% 1% 1%;'>
@@ -93,9 +86,7 @@
             <div id='stat2'>
                 
             </div> 
-            
            </div>
-           
         </div>
     </div>
     
@@ -113,16 +104,21 @@
             {% for j in results %}
              <li class='res'>
                 {% if results.video == False %}
-                <img src="{{ STATIC_PREFIX }}images/{{ j.filename }}" width='50' height='50' alt='No Pic' />
-                <a href="{{ j.filename }}" >{{ j.title }}</a> - FileType: <span style='color:red'>{{ j.type }}</span> - <a href="#"> View Description </a> &nbsp; &nbsp; &nbsp; Rank: {{ j.percent }}%
+                <a target="_blank" href="{{ STATIC_PREFIX }}images/{{ j.filename }}">
+                    <img src="{{ STATIC_PREFIX }}images/{{ j.filename }}"
+                         class="thumbnail"
+                         width='50'
+                         height='50'
+                         alt='No Pic'>
+                </a>
+                <a href="{{ j.filename }}" >{{ j.title }}</a> - <em><b>{{ j.type }}</b></em> <br> &nbsp;<a href="#"> View Description </a> &nbsp; &nbsp; &nbsp; Score: {{ j.percent }}%
                 {% else %}
-                <a href="{{ j.framename }}" >{{ j.title }}</a> - FileType: <span style='color:blue'> {{ j.type }} </span> - <a href="#"> View Description </a> &nbsp; &nbsp; &nbsp; Rank: {{ j.percent }}%
+                <a href="{{ j.framename }}" >{{ j.title }}</a> - <em><b>{{ j.type }}</b></em> <br> &nbsp;<a href="#"> View Description </a> &nbsp; &nbsp; &nbsp; Score: {{ j.percent }}%
                 {%endif %}
                 
                 <hr/>
             </li>
             {% endfor %}
-       
         </ol>  
     </div>
  </div>
