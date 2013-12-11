@@ -10,7 +10,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-BASE = os.path.dirname(os.path.abspath(__name__))
+BASE = dirname(abspath(__name__))
 
 TEMPLATE_BASE = BASE + "/imgsearch/templates"
 
