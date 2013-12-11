@@ -1,54 +1,39 @@
-# Django settings for projects project.
+from os.path import abspath, dirname
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Eudis Duran', 'eudisd@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
 #Eudis
-#BASE = '/home/prototype/repos/git/img-search/projects'
-#Reddy
-BASE = '/home/reddy/img-search/projects'
-#Carl
-#BASE = '/home/carl/protected/git/img-search/projects'
-#BASE = '/home/carl/git/img-search/projects'
+BASE = os.path.dirname(os.path.abspath(__name__))
 
-#Server
-#BASE = '/home5/bluemedi/.local/lib/python2.7/site-packages/projects'
+#BASE = '/home/prototype/repos/git/img-search/projects'
 #MY_MEDIA = '/home5/bluemedi/.local/python2.7/lib/site-packages/projects/imgsearch/static/images'
 
 TEMPLATE_BASE = BASE + "/imgsearch/templates"
 # This defines where all the file uploads go
 #MY_MEDIA = '/home/prototype/repos/git/img-search/projects/imgsearch/static/images'
 
-
 MY_MEDIA = BASE + '/imgsearch/static/images'
-
-
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', #'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': BASE + '/img-search.db',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.postgresql', #'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'imgsearch',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/New_York'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
