@@ -4,7 +4,9 @@ from os.path import abspath, dirname
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-APP.VERSION = 'v0.0.4'
+APP = {
+    'VERSION': 'v0.1.0'
+}
 
 ADMINS = (
     ('Eudis Duran', 'eudisd@gmail.com'),

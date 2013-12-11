@@ -20,7 +20,6 @@ from edit_dist import EditDistance
 from imgsearch.video import *
 
 
-#class to hold the result to display
 class QueryResult:
     """
     A Result class that represents an object to be passed to the templates on the results page
@@ -45,7 +44,8 @@ class QueryResult:
             return 0
         else:
             return 1
-        
+
+
 def sort_query_results(qrlst, attr=id):
     """
     Query Result Toolkit Function
@@ -56,8 +56,6 @@ def sort_query_results(qrlst, attr=id):
 
 
 def video_rank(histograms):
-
-
     return
 
 
@@ -178,8 +176,6 @@ def img_rank(histograms):
 
         j += 1
 
-
-
     # IMAGE SEARCH -============================================================
     j = 0
     for norm in all_norms:
@@ -244,15 +240,12 @@ def img_rank(histograms):
 
         j += 1
             
-    
-    # return both results
     return [result, result1]
 
 
 class UploadFile(forms.Form):
     name = models.ImageField()
 
-    
 
 def handle_img_upload(f):
     """ 
@@ -300,7 +293,8 @@ def calculate_hist(path, t, flag):
         database.  And we should if it's true.  This came about because
         of the fact that search image histograms do not need to be put in the database
         while uploaded images do.  And since I use the same function to calculate the
-        histograms there is no need to rewrite code, just set a flag."""
+        histograms there is no need to rewrite code, just set a flag.
+    """
     try:
         image = Image.open(path)
     except IOError:
@@ -361,7 +355,8 @@ def calculate_hist(path, t, flag):
 def gradient(filename, new_filename):
     """ This function generates a edge map on the given
         filename image.  It outputs a grayscale image 
-        map."""
+        map.
+    """
 
     threshold = 255
 
@@ -383,8 +378,6 @@ def gradient(filename, new_filename):
 
     # Generate a luminecanse image (Grayscale) of the same size and mode (L)
     edge_map = Image.new(image.mode, image.size)
-    #image.show()
-
 
     # Create a drawable object
     draw = ImageDraw.Draw(edge_map)
@@ -396,16 +389,10 @@ def gradient(filename, new_filename):
             IyVal = 0
             for i in range(3):
                 for j in range(3):
-                    #IxVal += Ix[i][j]*image.getpixel((x + i - 1, y + j - 1))
-                    #IyVal += Iy[i][j]*image.getpixel((x + i - 1, y + j - 1))
-
                     # This modification should prove to be very fast compared to the above
-                    
                     IxVal += Ix[i][j]*pix[x + i - 1, y + j - 1]
                     IyVal += Iy[i][j]*pix[x + i - 1, y + j - 1]
 
-  
-            #res = math.sqrt((IxVal**2) + (IyVal**2))        
             res = abs(IxVal) + abs(IyVal)
 
             if res > threshold:
@@ -419,20 +406,15 @@ def gradient(filename, new_filename):
     data = StringIO.StringIO()
     edge_map.save(data, "JPEG")
 
-    #edge_map.show()
-
     out = open(new_filename, "wb")
 
     out.write(data.getvalue())
     out.close()
     
-
     return
     
 
 def img_only_search(f):
-
-
     tmp_img = settings.IMAGE_DIR + '/cur_pic.jpg'
     tmp_img_edge = settings.IMAGE_DIR + '/cur_pic_edge.jpg'
 
@@ -451,34 +433,30 @@ def img_only_search(f):
     o.close()
     
 
-    ## Now, we calculate the edge and intensity histograms of this image...
+    # Now, we calculate the edge and intensity histograms of this image...
     norm_hist = calculate_hist(tmp_img, 'n', False)
     gradient(tmp_img, tmp_img_edge)
     edge_hist = calculate_hist(tmp_img_edge, 'e', False)
 
-    #Now, we pass the information to the calling method so we can pass it 
-    #to the template for display
-
-   
+    # Now, we pass the information to the calling method so we can pass it 
+    # to the template for display
 
     return [norm_hist, edge_hist]
 
-def main(request):
-    
-    t = loader.get_template("main/index.html")
-    return render_to_response('main/index.html', context_instance=RequestContext(request))
 
+def main(request):
+    context = {
+        'APP': settings.APP,
+    }
+    t = loader.get_template("main/index.html")
+    return render_to_response('main/index.html', context, context_instance=RequestContext(request))
 
 
 def upload(request):
-    
-    
     return render_to_response('upload/index.html', context_instance=RequestContext(request))
 
 
 def results(request):
-
-    
     if request.method == "POST":
         # First determine whats being included in the search
         try: 

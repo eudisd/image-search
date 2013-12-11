@@ -45,7 +45,6 @@ def gradient(filename, new_filename):
         print "Error opening image file!"
         exit(-1)
 
-
     # Generate a luminecanse image (Grayscale) of the same size and mode (L)
     edge_map = Image.new(image.mode, image.size)
 
@@ -59,16 +58,10 @@ def gradient(filename, new_filename):
             IyVal = 0
             for i in range(3):
                 for j in range(3):
-                    #IxVal += Ix[i][j]*image.getpixel((x + i - 1, y + j - 1))
-                    #IyVal += Iy[i][j]*image.getpixel((x + i - 1, y + j - 1))
-
                     # This modification should prove to be very fast compared to the above
-                    
                     IxVal += Ix[i][j]*pix[x + i - 1, y + j - 1]
                     IyVal += Iy[i][j]*pix[x + i - 1, y + j - 1]
 
-  
-            #res = math.sqrt((IxVal**2) + (IyVal**2))        
             res = abs(IxVal) + abs(IyVal)
 
             if res > threshold:
@@ -81,8 +74,6 @@ def gradient(filename, new_filename):
 
     data = StringIO.StringIO()
     edge_map.save(data, "JPEG")
-
-    #edge_map.show()
 
     out = open(new_filename, "wb")
 
@@ -225,8 +216,6 @@ def get_consecutive_hist(f, IMAGE_DIR, VIDEO_DIR):
 
     destination.close()
     iz.close()
-
-   
 
     # Added for loop to handle case where there is more than 
     # 1 clip.
