@@ -453,10 +453,16 @@ def main(request):
 
 
 def upload(request):
-    return render_to_response('upload/index.html', context_instance=RequestContext(request))
+    context = {
+        'APP': settings.APP,
+    }
+    return render_to_response('upload/index.html', context, context_instance=RequestContext(request))
 
 
 def results(request):
+    context = {
+        'APP': settings.APP,
+    }
     if request.method == "POST":
         # First determine whats being included in the search
         try: 
@@ -474,8 +480,8 @@ def results(request):
         if img == None and text != None:
             # text only search
             res = text_only_search(text)
-            
-            return render_to_response("results/index.html", {'query': text, 'results':res})
+            context.update({'query': text, 'results':res})
+            return render_to_response("results/index.html", context)
             
 
         elif img != None:
@@ -512,22 +518,28 @@ def results(request):
             res = sort_query_results(res, 'percent')
 
             if text == None:
-                return render_to_response("results/index.html", {'histograms': json.dumps(histograms), 'img_path' : request.FILES['img_file'].name, 'query': '', 'results':res})
+                context.update({'histograms': json.dumps(histograms), 'img_path' : request.FILES['img_file'].name, 'query': '', 'results':res})
+                return render_to_response("results/index.html", context)
             else:
                 txt_res = text_only_search(text)
                 res = txt_hist_res_merge(txt_res, res)
-                return render_to_response("results/index.html", {'histograms': json.dumps(histograms), 'img_path' : request.FILES['img_file'].name, 'query': '', 'results':res})
+                context.update({'histograms': json.dumps(histograms), 'img_path' : request.FILES['img_file'].name, 'query': '', 'results':res})
+                return render_to_response("results/index.html", context)
     
     return HttpResponseRedirect("/")
 
 
 def complete(request):
-    
-    return render_to_response('upload/complete.html', context_instance=RequestContext(request))
+    context = {
+        'APP': settings.APP,
+    }
+    return render_to_response('upload/complete.html', context, context_instance=RequestContext(request))
 
 
 def upload_file(request):
-
+    context = {
+        'APP': settings.APP,
+    }
     try:
     	if request.method == 'POST':
             form = None
@@ -592,8 +604,9 @@ def upload_file(request):
             form = UploadFile()
     except:
         return HttpResponse("Error During Upload")
-        
-    return render_to_response("upload/index.html", { 'form':form}, context_instance=RequestContext(request) )
+    
+    context.update({'form': form})   
+    return render_to_response("upload/index.html", context, context_instance=RequestContext(request) )
    
 
 STOP_WORDS = ['I', 'a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'com', 

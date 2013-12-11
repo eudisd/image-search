@@ -3,7 +3,7 @@
     margin: auto;
     text-align: center;
     padding: 2% 2% 3% 2%;
-    border: 1px solid gray;
+    background: white;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radisu: 5px;
@@ -19,7 +19,7 @@
     margin-top: 2%;
     text-align: center;
     border: 2% 2% 2% 2%;
-    border: 1px solid gray;
+    background: white;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
