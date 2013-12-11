@@ -17,11 +17,9 @@ import logging as log
 from edit_dist import EditDistance
 from imgsearch.models import *
 
-
 IMAGE_DIR = settings.IMAGE_DIR
 VIDEO_DIR = settings.VIDEO_DIR
 
-# Here be dragons...
 
 def gradient(filename, new_filename):
     """ This function generates a edge map on the given
@@ -80,8 +78,8 @@ def gradient(filename, new_filename):
     out.write(data.getvalue())
     out.close()
     
-
     return
+
 
 def calculate_hist_and_id(path, t, flag):
     """
@@ -190,6 +188,7 @@ def calculate_hist(f):
     
     return ''
 
+
 def get_consecutive_hist(f, IMAGE_DIR, VIDEO_DIR):
     """ 
     This function calculates the histograms inside
@@ -235,7 +234,6 @@ def get_consecutive_hist(f, IMAGE_DIR, VIDEO_DIR):
     # First, we change directory     
 
     return List
-
 
 
 def get_sequence(hists):
@@ -318,7 +316,6 @@ def seq_into_db(filename, seq, hist, title, desc):
         TMP2 = IMAGE_DIR + '/tmp2.jpg'
         TMP3 = IMAGE_DIR + '/tmp3.jpg'
 
-
         # Generate edge map here for the 3 select frames
 
         gradient(PATH1, TMP1)
@@ -364,9 +361,7 @@ def seq_into_db(filename, seq, hist, title, desc):
 
     video.clips = clips
 
-
     video.save()
-
 
     return
 
