@@ -5,9 +5,11 @@
         <meta http-equiv="Context-Type" context="text/html;charset=UTF-8" />
         {% load static %}
         {% get_static_prefix as STATIC_PREFIX %}
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css">
         <link rel='stylesheet' href="{{ STATIC_PREFIX }}css/base.css" type='text/css' />
         {% block css %} {% endblock %}
-		<script type='text/javascript' src="{{ STATIC_PREFIX }}js/jquery-1.5.2.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
         {% block js %} {% endblock %}'
 		
     </head>
@@ -15,7 +17,7 @@
         <div id="container">
             <div id="header">
                 {% block header %} <h1> Image Search </h1>
-                <span style='font-size:18px; color:orange;'>Alpha</span> {% block version %} &#8226; <span style='color: rgb(255,50,50);'>v0.0.4</span> <br /> <br />
+                <span style='font-size:18px; color:orange;'>Alpha</span> {% block version %} &#8226; <span style='color: rgb(255,50,50);'>{{ settings.APP.VERSION }}</span> <br /> <br />
                 <a href='http://semver.org'>semver.org</a> {% endblock %}
                 {% endblock %}
                 
@@ -26,7 +28,7 @@
             <div id="footer">
                 {% block footer %} 
 
-                &copy; 2011 Reddy Chukkalore, Eudis Duran, Carl Chinatomby.
+                &copy; 2013 Eudis Duran
                 {% endblock %}
                 
             </div>

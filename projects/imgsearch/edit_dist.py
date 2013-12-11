@@ -73,10 +73,7 @@ class EditDistance():
             if not results:
                 curedit = self.editRec(curedit)
                 editcnt += 1
-        
-        print "result for " + word + " is: "
-        print results
-        print "after " + str(editcnt) + " edits!"
+
         return results, editcnt
         #return max(results, key=self.wordlist.get)
         

@@ -48,8 +48,6 @@ def gradient(filename, new_filename):
 
     # Generate a luminecanse image (Grayscale) of the same size and mode (L)
     edge_map = Image.new(image.mode, image.size)
-    #image.show()
-
 
     # Create a drawable object
     draw = ImageDraw.Draw(edge_map)
@@ -210,12 +208,7 @@ def get_consecutive_hist(f, IMAGE_DIR, VIDEO_DIR):
     an entire clip.
     """
     
-    print "Image: ", IMAGE_DIR
-    print "Video: ", VIDEO_DIR
-    
     FILE_PATH = str(IMAGE_DIR) + '/' + str(f.name)
-    
-    print "FilePath: " + FILE_PATH 
 
     iz = zipfile.ZipFile(f, "r")         #Input Zip File
     
@@ -246,8 +239,6 @@ def get_consecutive_hist(f, IMAGE_DIR, VIDEO_DIR):
             hists[i] = calculate_hist(filen)
         
         List.append(hists)
-        
-    print List
 
     # First, we get the files from the archive, there is a specific format
     # which is root_folder/[clip#]/[frame#]

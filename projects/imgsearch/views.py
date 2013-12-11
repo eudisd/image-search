@@ -7,7 +7,6 @@ from django.conf import settings
 from django.conf import settings
 from django.http import Http404
 
-
 import json
 import sys
 import string
@@ -96,9 +95,7 @@ def img_rank(histograms):
             m = max((norm['bin' + str(i)], cur_norm[i]))
             if m != 0:
                 res.percent += abs( 100.0 * (norm_diff[i]/ float(m)) )
-                #print "Histogram #%d Bin %d Difference = %f" % (j, i, abs( 100.0 * (norm_diff[i]/ float(m)) ))
             else:
-                #print "Histogram #%d Bin %d Difference = %f" % (j, i, 0)
                 pass
 
             i += 1
@@ -120,8 +117,6 @@ def img_rank(histograms):
 
                 clip_id = clip['id']
                 videos = Videos.objects.all().values()
-                print "LEN: "
-                print len(videos)
                 for vid in videos:
                     if str(clip_id) in vid['clips']:
                         res.filename = vid['filename'] 
@@ -130,38 +125,11 @@ def img_rank(histograms):
                         res.percent = res.percent/16.0
                         res.type = 'Video'
                         res.video = True
-        """  
-        res.filename = Images.objects.all().values().get(edge_hist=res.id)['filename']
-        res.title = Images.objects.all().values().get(edge_hist=res.id)['title']
-        res.description = Images.objects.all().values().get(edge_hist=res.id)['description']
-        res.percent = res.percent/16.0
-
-        res.type = "Video"
-        res.video = True
-        hist_type = Histograms.objects.all().values().get(id=res.id)['type']
-        #find the edge hist clip that contain that id in that array (dammit this made things harder)
-        curclip = Clips.objects.all().filter(Q(edge_hist_clips__startswith=res.id+',') | Q(edge_hist_clips__endswith=','+res.id) | Q(edge_hist_clips__contains=','+res.id+',') | Q(edge_hist_clips__exact=res.id))
-        clip_edge_hists = curclip.edge_hist_clips
-        #now we need to find out what frame match
-        clip_edge_lst = clip_edge_hists.split(',') 
-        if clip_edge_list[0] == res.id:
-            pass
-            #set the framename, we may need the clip name attribute added so we can know what path to go to.
-            #test the above and then do the same process to find out what video the clip is associated with with that same type of query 
-            #then set the filename
-        elif clip_edge_list[1] == res.id:
-            pass
-        else:
-            pass
-            
-        #res.framename = 
-        """
         if res.percent != 100.0:
             result.append(res)
-        #print "Cummulative difference for Histogram #%d = %f" % (j, result[j].percent)
+
         j += 1
 
-    print "\n Edge Map: "
     j = 0
     for edge in all_edge_videos:
         i = 0
@@ -173,9 +141,7 @@ def img_rank(histograms):
             m = max((edge['bin' + str(i)], cur_edge[i]))
             if m != 0:
                 res.percent += abs( 100.0 * (edge_diff[i]/ float(m)) )
-                #print "Histogram #%d Bin %d Difference = %f" % (j, i, abs( 100.0 * (edge_diff[i]/ float(m)) ))
             else:
-                #print "Histogram #%d Bin %d Difference = %f" % (j, i, 0)      
                 pass
 
             i += 1
@@ -198,8 +164,6 @@ def img_rank(histograms):
 
                 clip_id = clip['id']
                 videos = Videos.objects.all().values()
-                print "LEN: "
-                print len(videos)
                 for vid in videos:
                     if str(clip_id) in vid['clips']:
                         res.filename = vid['filename'] 
@@ -208,44 +172,10 @@ def img_rank(histograms):
                         res.percent = res.percent/16.0
                         res.type = 'Video'
                         res.video = True
-        """
-        print 
-        print "ID: ",
-        print res.id
-        """
 
-        """
-        res.filename = Images.objects.all().values().get(edge_hist=res.id)['filename']
-        res.title = Images.objects.all().values().get(edge_hist=res.id)['title']
-        res.description = Images.objects.all().values().get(edge_hist=res.id)['description']
-        res.percent = res.percent/16.0
-
-        
-        if str(Histograms.objects.all().values().get(id=res.id)['is_video']) == 'y':
-            res.type = "Video"
-            res.video = True
-            hist_type = Histograms.objects.all().values().get(id=res.id)['type']
-            #find the edge hist clip that contain that id in that array (dammit this made things harder)
-            curclip = Clips.objects.all().filter(Q(edge_hist_clips__startswith=res.id+',') | Q(edge_hist_clips__endswith=','+res.id) | Q(edge_hist_clips__contains=','+res.id+',') | Q(edge_hist_clips__exact=res.id))
-            clip_edge_hists = curclip.edge_hist_clips
-            #now we need to find out what frame match
-            clip_edge_lst = clip_edge_hists.split(',') 
-            if clip_edge_list[0] == res.id:
-                #set the framename, we may need the clip name attribute added so we can know what path to go to.
-                #test the above and then do the same process to find out what video the clip is associated with with that same type of query 
-                #then set the filename
-            elif clip_edge_list[1] == res.id:
-                pass
-            else:
-                pass
-            
-            #res.framename = 
-        """
         if res.percent != 100.0:
             result1.append(res)
 
-
-        #print "Cummulative difference for Histogram #%d = %f" % (j, result1[j].percent)
         j += 1
 
 
@@ -262,20 +192,13 @@ def img_rank(histograms):
             m = max((norm['bin' + str(i)], cur_norm[i]))
             if m != 0:
                 res.percent += abs( 100.0 * (norm_diff[i]/ float(m)) )
-                #print "Histogram #%d Bin %d Difference = %f" % (j, i, abs( 100.0 * (norm_diff[i]/ float(m)) ))
             else:
-                #print "Histogram #%d Bin %d Difference = %f" % (j, i, 0)
                 pass
 
             i += 1
             if i >= 16:
                 break
         res.id = int(norm['id'])
-        """
-        print 
-        print "ID: ",
-        print res.id
-        """
         res.filename = Images.objects.all().values().get(orig_hist=res.id)['filename']
         res.percent = res.percent/16.0
         res.title = Images.objects.all().values().get(orig_hist=res.id)['title']
@@ -289,10 +212,8 @@ def img_rank(histograms):
 
         if res.percent != 100.0:
             result.append(res)
-        #print "Cummulative difference for Histogram #%d = %f" % (j, result[j].percent)
         j += 1
 
-    print "\n Edge Map: "
     j = 0
     for edge in all_edge:
         i = 0
@@ -304,9 +225,7 @@ def img_rank(histograms):
             m = max((edge['bin' + str(i)], cur_edge[i]))
             if m != 0:
                 res.percent += abs( 100.0 * (edge_diff[i]/ float(m)) )
-                #print "Histogram #%d Bin %d Difference = %f" % (j, i, abs( 100.0 * (edge_diff[i]/ float(m)) ))
-            else:
-                #print "Histogram #%d Bin %d Difference = %f" % (j, i, 0)      
+            else:    
                 pass
 
             i += 1
@@ -314,11 +233,6 @@ def img_rank(histograms):
                 break
         
         res.id = int(edge['id'])
-        """
-        print 
-        print "ID: ",
-        print res.id
-        """
 
         res.filename = Images.objects.all().values().get(edge_hist=res.id)['filename']
         res.title = Images.objects.all().values().get(edge_hist=res.id)['title']
@@ -328,13 +242,10 @@ def img_rank(histograms):
         if res.percent != 100.0:
             result1.append(res)
 
-
-        #print "Cummulative difference for Histogram #%d = %f" % (j, result1[j].percent)
         j += 1
             
     
     # return both results
-    #print sorted(result)
     return [result, result1]
 
 
@@ -352,13 +263,9 @@ def handle_img_upload(f):
     
     path = settings.IMAGE_DIR + '/' + f.name
     tmp_file = settings.IMAGE_DIR + '/tmp.jpg'
-
-    print path
     
     try:    
-        o = open(path, "wb")
-        
-        
+        o = open(path, "wb") 
     except IOError:
         print "Error opening file for writing!"
         exit(-1)
@@ -399,12 +306,6 @@ def calculate_hist(path, t, flag):
     except IOError:
         print "Error Opening Image file (PIL)"
 
-    #print "Format: ", image.format, " Size: ", image.size, " Mode: ", image.mode
-
-    # This is so neat!  A histogram method!  Hopefully the professor doesn't disapprove.
-    
-    #print "Histogram: ", image.histogram()
-
     # However, we must make it a 16 bin historgram.
     try:
         hist = image.histogram()
@@ -432,12 +333,6 @@ def calculate_hist(path, t, flag):
             
         else:
             hist16bin[bin_count] += hist[i]
-            
-    print "\n\n"
-    print "16 Bin histogram: ", hist16bin
-    print 
-    print "Size: ", len(hist16bin)
-    print "Original Size: ", len(hist)
     
     # Now we put the histogram in the database
     if flag == True:
@@ -597,7 +492,6 @@ def results(request):
                 text = None
         except: 
             text = None
-        print "text ", text, " img: ", img
         
         if img == None and text != None:
             # text only search
@@ -608,8 +502,6 @@ def results(request):
 
         elif img != None:
             # img only search   
-           
-            print  " img: ", request.FILES['img_file'].content_type
 
             if request.FILES['img_file'].content_type != "image/jpeg":
                 return HttpResponse("Must be JPEG!")
@@ -641,30 +533,14 @@ def results(request):
               
             res = sort_query_results(res, 'percent')
 
-            print results
             if text == None:
                 return render_to_response("results/index.html", {'histograms': json.dumps(histograms), 'img_path' : request.FILES['img_file'].name, 'query': '', 'results':res})
-                #return render_to_response("results/index.html", context_instance=RequestContext(request))
             else:
-                # text AND img search        
-                print "testing txt and img search"
-                
                 txt_res = text_only_search(text)
-                print "the text results were"
-                print txt_res
-                print "the img results were"
-                print res
                 res = txt_hist_res_merge(txt_res, res)
-                print "the merged results are"
-                print res
                 return render_to_response("results/index.html", {'histograms': json.dumps(histograms), 'img_path' : request.FILES['img_file'].name, 'query': '', 'results':res})
     
-                    
-
     return HttpResponseRedirect("/")
-
-
-
 
 
 def complete(request):
@@ -673,9 +549,6 @@ def complete(request):
 
 
 def upload_file(request):
-    print request.POST['textarea']
-    print 
-    print request.POST['title']
 
     try:
     	if request.method == 'POST':
@@ -704,12 +577,6 @@ def upload_file(request):
                     # Here, we insert the Images information, now that we have the two IDs above.
 
                     img = Images()
-               
-                    print str(request.FILES['img'].name)
-                    print int(norm_id)
-                    print int(edge_id)
-                    print str(request.POST['title'])
-                    print str(request.POST['textarea'])
                 
                     img.filename = str(request.FILES['img'].name)
                     img.orig_hist = int(norm_id)
@@ -763,19 +630,17 @@ def index_img_kw(img, title, description):
     then stores the frequencies into the Keywords table for the given
     image_id
     """
-    print "in this function"
-    #build frequency table for the keywords
+
     frequencies = {}
     title_kws = title.split()
     des_kws = description.split()
-    #titles count as double weight
+
+
     for word in title_kws:
         word = word.lower()
         word = string.translate(word, None, string.punctuation)
         if word not in STOP_WORDS:
             frequencies[word] = frequencies[word] + 2 if word in frequencies else 2
-    print "title frequencies are"
-    print frequencies
     
     for word in des_kws:
         if word not in STOP_WORDS:
@@ -783,10 +648,7 @@ def index_img_kw(img, title, description):
             word = string.translate(word, None, string.punctuation)
             frequencies[word] = frequencies[word] + 1 if word in frequencies else 1
     
-    print "frequencies after the descriptions are"
-    print frequencies
-    
-    #Save in database now for this image
+    # Save in database now for this image
     try:
         for entry, val in frequencies.items():
         
@@ -813,26 +675,12 @@ def text_only_search(text):
 
     for word in search_words:
         if word not in STOP_WORDS:
-            #exact and substring keyword matches incase-sensitive
-            #####
-            #cur_res = Keywords.objects.extra(select={'diff':"length(keyword)-length(%s)"}, select_params=[word]).filter(keyword__contains=word).order_by('diff','-frequency')
-            #results = list(chain(results, cur_res))
-            #print cur_res
-            ####
             ed_list, ed_diff = ed.correct(word)
             for res in ed_list:
-                #### Advanced search features for later
-                #cur_res = Keywords.objects.extra(select={'diff':"length(keyword)-length(%s)+%d"}, select_params=[res, diff]).filter(keyword__contains=word)order_by('diff','-frequency')
-                ####
                 cur_res = Keywords.objects.extra(select={'diff':"%s"}, select_params=[ed_diff]).filter(keyword__exact=res).order_by('diff','-frequency')
                 results = list(chain(results, cur_res))
-                print cur_res
-            #for res in cur_res:
-            #   for kw in res:
-            #       print "Keyword %s has frequency %d and diff %d" % (res.keyword, res.frequency, res.diff)
 
-    print results
-    #now we need to rank the results for images based on most exact matches
+    # now we need to rank the results for images based on most exact matches
     ranked_res = rank_results(results)
 
     return ranked_res
@@ -852,7 +700,7 @@ def rank_results(results):
     points = {}
     diff = {}
     ranker = {}
-    print "in ranking"
+
     for result in results:
         imgid = result.image.id
         if imgid in frequency:
@@ -868,19 +716,14 @@ def rank_results(results):
         
         points[imgid] = frequency[imgid] * kwnum[imgid]
 
-    #ranked_diff = sorted(diff.iteritems(), key=itemgetter(1), reverse=True)
-    #ranked_diff.reverse()
-    #print ranked_diff
-    #ranked_res = sorted(points, key=points.__getitem__, reverse=True)
     ranked_freq = sorted(ranker.iteritems(), key=itemgetter(1), reverse=True)
-    #another.reverse()
-    print ranked_freq
+
     ranked_diff = sorted(ranked_freq, key=lambda a: -a[1][1], reverse=True)
-    print ranked_diff
+
     ranked_res = [ x[0] for x in ranked_diff ] 
-    print ranked_res
+
     final_res = txt_queryres_from_imgid(ranked_res, points)
-    print final_res
+
     return final_res
 
 def txt_queryres_from_imgid(idlst, points):
