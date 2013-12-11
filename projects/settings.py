@@ -63,7 +63,6 @@ MEDIA_URL = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = ''
-#Server
 #STATIC_ROOT = '/home5/bluemedi/public_html/img/static/'
 
 # URL prefix for static files.
@@ -93,7 +92,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'u4ij%f((%fwr$jb3h@#e6kpm5++tq0pg(zhxce8(%wqxn!2(=r'
+SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -130,7 +129,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-
     'imgsearch'
 )
 
