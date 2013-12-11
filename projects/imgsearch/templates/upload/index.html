@@ -60,21 +60,25 @@
         </div>
         <div id='submitpart'>
             <div class="row">
-                <span>Title </span>
-                <br>
-                <input class='rounded' name='title' id='title' type='text' size='20'>
-                <br><br>
-            </div>
-            <div class="row">
-                <span> Description </span><br>
-                <textarea class='rounded' cols='30' rows='5' id='texta' name='textarea'></textarea>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-md-offset-5">
-                    <label for="sub"> Submit Button </label>
-                    <input class="form-control" class='btn btn-primary' id='sub' type='button' value="Upload">
+                <div class="col-md-1 col-md-offset-2">
+                    <label for="title">Title</label>
+                    <input class='rounded' name='title' id='title' type='text' size='20'>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-2 col-md-offset-2">
+                    <label for="texta">Description</label>
+                    <textarea class='rounded' cols='30' rows='5' id='texta' name='textarea'></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-2">
+                    <label for="sub" class="sr-only"> Submit Button </label>
+                    <input class="form-control" class='btn btn-success' id='sub' type='button' value="Upload">
+                </div>
+            </div>
+            <br>
         </div>
     </div>
 </form>
