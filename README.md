@@ -3,6 +3,7 @@ _Allows users to search by using images_
 
 **Built On:**
 * Django
+* Bootstrap
 * jQuery
 * Apache
 
