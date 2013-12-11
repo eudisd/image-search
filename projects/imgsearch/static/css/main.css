@@ -12,12 +12,6 @@
     text-align: center;
 }
 
-#search_box {
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-}
-
 #image {
     width: 100%;
     text-align: center;

@@ -5,7 +5,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 APP = {
-    'VERSION': 'v0.1.0'
+    'VERSION': 'v0.1.0',
+    'RELEASE': 'alpha',
 }
 
 ADMINS = (
