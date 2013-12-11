@@ -259,8 +259,9 @@ def handle_img_upload(f):
     
     try:    
         o = open(path, "wb") 
-    except IOError:
+    except IOError as e:
         print "Error opening file for writing!"
+        print e
         exit(-1)
 
     f.open()
@@ -421,8 +422,9 @@ def img_only_search(f):
     try:    
         o = open(tmp_img, "wb")
         
-    except IOError:
+    except IOError as e:
         print "Error opening file for writing!"
+        print e
         exit(-1)
 
     f.open()
