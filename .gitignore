@@ -6,4 +6,4 @@
 #*.gif
 *.bmp
 *.dat
-*.db
+projects/local_settings.py

@@ -4,8 +4,6 @@ $(document).ready(function(){
     var data1.push(res[0]);
     var data2.push(res[1]);
 
-
-
     var graph = Raphael("stat", 168, 148);
     var graph2 = Raphael("stat2", 168, 148);
 

@@ -24,17 +24,6 @@ MY_MEDIA = BASE + '/imgsearch/static/images'
 IMAGE_DIR = BASE + '/imgsearch/static/images'
 VIDEO_DIR = BASE + '/imgsearch/static/videos'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'imgsearch',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
@@ -125,3 +114,9 @@ LOGGING = {
         },
     }
 }
+
+
+try:
+    from local_settings import *
+except:
+    pass

@@ -480,8 +480,9 @@ def results(request):
         if img == None and text != None:
             # text only search
             res = text_only_search(text)
-            context.update({'query': text, 'results':res})
-            return render_to_response("results/index.html", context)
+
+            context.update({'query': text, 'results':res, 'histograms': res})
+            return render_to_response("results/index.html", context, context_instance=RequestContext(request))
             
 
         elif img != None:
@@ -492,7 +493,6 @@ def results(request):
 
             form = UploadFile(request.POST, request.FILES['img_file'])
 
-            
             # Test to see that the uploaded image is 'L' band
             test_grayscale = Image.open(StringIO.StringIO(request.FILES['img_file'].read()))
             if test_grayscale.mode != 'L':
