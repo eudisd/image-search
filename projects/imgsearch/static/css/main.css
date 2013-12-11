@@ -32,9 +32,5 @@
 }
 
 #upload a {
-    text-decoration: none;
-}
-
-#upload a:hover {
-    font-size: 20px;
+    text-decoration: underline;
 }
