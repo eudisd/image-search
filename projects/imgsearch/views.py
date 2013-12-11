@@ -1,47 +1,26 @@
-# Create your views here.
-
 from django.template import Context, RequestContext, loader
 from django.http import HttpResponse, HttpResponseRedirect
-
 from django.shortcuts import render_to_response
 from django import forms
 from django.db import models
 from django.conf import settings
 from django.conf import settings
-
-#import django.utils.datastructures.SortedDict
-
-from imgsearch.models import Histograms, Images, Keywords
-
 from django.http import Http404
 
+
+import json
+import sys
+import string
 import StringIO
-from PIL import Image, ImageDraw
 
 from itertools import chain
 from operator import itemgetter
+from PIL import Image, ImageDraw
 
 from edit_dist import EditDistance
-
-import json
-
-import sys
-import string
-
 from imgsearch.video import *
+from imgsearch.models import Histograms, Images, Keywords
 
-
-#This needs to point to your repository static/image folder!
-#IMAGE_DIR = '/home/prototype/repos/git/img-search/projects/imgsearch/static/images'
-#IMAGE_DIR = '/home/carl/git/img-search/projects/imgsearch/static/images'
-#IMAGE_DIR = '/home5/bluemedi/.local/lib/python2.7/site-packages/projects/imgsearch/static/images'
-
-#IMAGE_DIR = '/home/reddy/img-search/projects/imgsearch/static/images'
-#VIDEO_DIR = '/home/prototype/repos/git/img-search/projects/imgsearch/static/videos'
-#IMAGE_DIR = '/home/reddy/img-search/projects/imgsearch/static/images'
-
-VIDEO_DIR = settings.VIDEO_DIR
-IMAGE_DIR = settings.IMAGE_DIR
 
 #class to hold the result to display
 class QueryResult:
@@ -372,8 +351,8 @@ def handle_img_upload(f):
     and puts that information in the database.
     """
     
-    path = IMAGE_DIR + '/' + f.name
-    tmp_file = IMAGE_DIR + '/tmp.jpg'
+    path = settings.IMAGE_DIR + '/' + f.name
+    tmp_file = settings.IMAGE_DIR + '/tmp.jpg'
 
     print path
     
@@ -560,8 +539,8 @@ def gradient(filename, new_filename):
 def img_only_search(f):
 
 
-    tmp_img = IMAGE_DIR + '/cur_pic.jpg'
-    tmp_img_edge = IMAGE_DIR + '/cur_pic_edge.jpg'
+    tmp_img = settings.IMAGE_DIR + '/cur_pic.jpg'
+    tmp_img_edge = settings.IMAGE_DIR + '/cur_pic_edge.jpg'
 
     try:    
         o = open(tmp_img, "wb")
@@ -752,7 +731,7 @@ def upload_file(request):
                     """
                     res = request.FILES['vid']
 
-                    histograms = get_consecutive_hist(res, IMAGE_DIR, VIDEO_DIR)
+                    histograms = get_consecutive_hist(res, settings.IMAGE_DIR, settings.VIDEO_DIR)
                     
                     sequence = get_sequence(histograms)
 
