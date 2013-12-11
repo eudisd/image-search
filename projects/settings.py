@@ -16,14 +16,12 @@ TEMPLATE_BASE = BASE + "/imgsearch/templates"
 
 MY_MEDIA = BASE + '/imgsearch/static/images'
 
+IMAGE_DIR = BASE + '/imgsearch/static/images'
+VIDEO_DIR = BASE + '/imgsearch/static/videos'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', #'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'imgsearch',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+
     }
 }
 

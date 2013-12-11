@@ -6,6 +6,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django import forms
 from django.db import models
+from django.conf import settings
+from django.conf import settings
 
 #import django.utils.datastructures.SortedDict
 
@@ -36,8 +38,10 @@ from imgsearch.video import *
 
 #IMAGE_DIR = '/home/reddy/img-search/projects/imgsearch/static/images'
 #VIDEO_DIR = '/home/prototype/repos/git/img-search/projects/imgsearch/static/videos'
-IMAGE_DIR = '/home/reddy/img-search/projects/imgsearch/static/images'
+#IMAGE_DIR = '/home/reddy/img-search/projects/imgsearch/static/images'
 
+VIDEO_DIR = settings.VIDEO_DIR
+IMAGE_DIR = settings.IMAGE_DIR
 
 #class to hold the result to display
 class QueryResult:
