@@ -18,7 +18,7 @@ MY_MEDIA = BASE + '/imgsearch/static/images'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql', #'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', #'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'imgsearch',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
